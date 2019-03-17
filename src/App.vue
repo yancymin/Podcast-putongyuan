@@ -5,6 +5,8 @@
 </template>
 
 <style lang="scss">
+@import "./style/reset.css";
+
 #app {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;

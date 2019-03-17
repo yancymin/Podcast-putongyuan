@@ -1,6 +1,9 @@
 <template>
   <div class="home">
-    <audio :src='link' controls></audio>
+    <div class="player">
+      <div class="cover"></div>
+      <audio :src="link" controls></audio>
+    </div>
   </div>
 </template>
 
@@ -23,6 +26,22 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  .player {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .cover {
+      width: 240px;
+      height: 240px;
+      border-radius: 8px;
+      background: url('../assets/cover.jpg') no-repeat;
+      background-size: cover;
+      margin-bottom: 24px;
+    }
+  }
 }
 </style>
 
