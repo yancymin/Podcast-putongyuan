@@ -13,7 +13,7 @@ export default {
   data() {
     return {
       link:
-        "https://yancymin.oss-cn-beijing.aliyuncs.com/%E6%99%AE%E9%80%9A%E5%9C%86-%E7%AC%AC1%E6%9C%9F%20-%202019%3A3%3A17%20%E4%B8%8B%E5%8D%885.49-1.mp3"
+        "http://pojj9t7wl.bkt.clouddn.com/%E6%99%AE%E9%80%9A%E5%9C%86-%E7%AC%AC1%E6%9C%9F%20-%202019:3:17%20%E4%B8%8B%E5%8D%885.49.mp3"
     };
   }
 };
