@@ -1,0 +1,33 @@
+$gray-1: #eae9e5;
+$gray-2: #929190;
+$gray-3: #dadada;
+$black-1: #333333;
+$black-2: #808080;
+$black-3: #5c5c5c;
+
+@mixin fontBold($color,$lineHeight,$LetterSpacing) {
+  font-family: source-han-sans-traditional, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  color: $color;
+  line-height: $lineHeight;
+  letter-spacing: $letterSpacing;
+}
+
+@mixin fontLight($color,$lineHeight,$LetterSpacing) {
+  font-family: source-han-sans-traditional, sans-serif;
+  font-weight: 200;
+  font-style: normal;
+  color: $color;
+  line-height: $lineHeight;
+  letter-spacing: $letterSpacing;
+}
+
+@mixin fontRegular($color,$lineHeight,$LetterSpacing) {
+  font-family: source-han-sans-traditional, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: $color;
+  line-height: $lineHeight;
+  letter-spacing: $letterSpacing;
+}
