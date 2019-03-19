@@ -6,13 +6,20 @@
 
 <style lang="scss">
 @import "./style/reset.css";
+@import "./style/global.scss";
 
 #app {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  text-align: left;
+  color: $black-1;
+  background-color: $gray-1;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
 }
 
+a {
+  text-decoration-line: none;
+} 
 </style>
