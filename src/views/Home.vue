@@ -293,6 +293,21 @@ export default {
         }
         &__player-area {
           width: calc(100% - 288px);
+          display: flex;
+          justify-content: start;
+          flex-direction: column;
+          align-items: center;
+          padding: 36px 24px 24px 24px;
+          p {
+            width: 56px;
+            height: 56px;
+            border-radius: 56px;
+            text-align: center;
+            vertical-align: text-bottom;
+            background-color: $gray-1;
+            @include fontCrimson(40px,$black-1,66px,0);
+          }
+
         }
       }
       &__detail {

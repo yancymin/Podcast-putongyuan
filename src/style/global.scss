@@ -5,6 +5,8 @@ $black-1: #333333;
 $black-2: #808080;
 $black-3: #5c5c5c;
 
+@import url('https://fonts.googleapis.com/css?family=Crimson+Text:700');
+
 ::selection {
     background-color: rgba(255, 199, 0, 0.25);
     color: #544100;
@@ -34,6 +36,14 @@ $black-3: #5c5c5c;
     font-family: source-han-sans-traditional, sans-serif;
     font-weight: 400;
     font-style: normal;
+    font-size: $fontSize;
+    color: $color;
+    line-height: $lineHeight;
+    letter-spacing: $letterSpacing;
+}
+
+@mixin fontCrimson ($fontSize, $color, $lineHeight, $letterSpacing) {
+    font-family: 'Crimson Text', serif;
     font-size: $fontSize;
     color: $color;
     line-height: $lineHeight;
