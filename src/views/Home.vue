@@ -174,7 +174,37 @@
           <div class="content__current-play__player__player-area">
             <p>1</p>
             <h1>從壹次心理咨詢裏講普通圓</h1>
-            <div class="play-control"></div>
+            <div class="play-control">
+              <div class="play-control__btn">
+                <div class="play-control__btn__play-icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M8 5v14l11-7z"></path>
+                    <path d="M0 0h24v24H0z" fill="none"></path>
+                  </svg>
+                </div>
+                <div class="play-control__btn__pause-icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path>
+                    <path d="M0 0h24v24H0z" fill="none"></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="play-control__timeline-area">
+                <div class="play-control__timeline-area__time"></div>
+                <span class="time-num-left">0:00</span>
+                <span class="time-num-right">30:00</span>
+              </div>
+            </div>
           </div>
         </div>
         <div class="content__current-play__detail">
@@ -283,31 +313,105 @@ export default {
         height: 288px;
         display: flex;
         justify-content: space-between;
-        background-color: $black-1;
         &__cover {
           width: 280px;
           height: 280px;
           border: 4px solid $black-1;
+          border-right: 0;
           background: url("../assets/cover.jpg") no-repeat;
           background-size: cover;
         }
         &__player-area {
-          width: calc(100% - 288px);
+          width: calc(100% - (288px + 44px));
           display: flex;
-          justify-content: start;
+          justify-content: space-between;
           flex-direction: column;
           align-items: center;
-          padding: 36px 24px 24px 24px;
+          padding: 36px 24px 28px 24px;
+          background-color: $black-1;
+
           p {
+            position: relative;
             width: 56px;
             height: 56px;
             border-radius: 56px;
             text-align: center;
             vertical-align: text-bottom;
             background-color: $gray-1;
-            @include fontCrimson(40px,$black-1,66px,0);
+            margin-bottom: 24px;
+            @include fontCrimson(40px, $black-1, 66px, 0);
+
+            &:before {
+              content: "";
+              position: absolute;
+              left: -152px;
+              top: 28px;
+              display: block;
+              width: 142px;
+              height: 1px;
+              background-color: $black-3;
+            }
+            &:after {
+              content: "";
+              position: absolute;
+              left: 66px;
+              top: 28px;
+              display: block;
+              width: 142px;
+              height: 1px;
+              background-color: $black-3;
+            }
           }
 
+          h1 {
+            position: absolute;
+            top: 120px;
+            text-align: center;
+            @include fontBold(24px, $gray-1, 32px, 1px);
+            &::selection {
+              color: $gray-1;
+            }
+          }
+
+          .play-control {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            &__btn {
+              svg {
+                fill: $gray-1;
+              }
+
+              &__play-icon {
+              }
+
+              &__pause-icon {
+                display: none;
+              }
+            }
+            &__timeline-area {
+              position: relative;
+              width: 312px;
+
+              &__time {
+                width: 100%;
+                height: 4px;
+                background-color: $gray-1;
+              }
+
+              .time-num-left,
+              .time-num-right {
+                position: absolute;
+                margin-top: 6px;
+                @include fontRegular(12px, $gray-2, 12px, 1px);
+              }
+
+              .time-num-right {
+                right: 0;
+              }
+            }
+          }
         }
       }
       &__detail {
