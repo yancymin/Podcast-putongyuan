@@ -172,33 +172,41 @@
         <div class="content__current-play__player">
           <div class="content__current-play__player__cover"></div>
           <div class="content__current-play__player__player-area">
-            <p></p>
+            <p>1</p>
             <h1>從壹次心理咨詢裏講普通圓</h1>
             <div class="play-control"></div>
           </div>
-          <div class="content__current-play__detail">
-            <p>本期內容</p>
-            <p>當我們談論編輯設計時，我們可以談論些什麼：一個術語的涵義，一門學科的範疇，一項工作的內容，一種設計的態度？今日三人鼎談，我們邀來了老朋友——設計師同時也是一位編輯的 Mira——與聽眾分享關於「編輯設計」的理解。</p>
-            <div>
-              <p class="detail__time"></p>
-              <span class="detail__tag">心理學</span>
-              <span class="detail__tag">童年</span>
-              <span class="detail__tag">工作</span>
-            </div>
+        </div>
+        <div class="content__current-play__detail">
+          <h3>本期內容</h3>
+          <p>當我們談論編輯設計時，我們可以談論些什麼：一個術語的涵義，一門學科的範疇，一項工作的內容，一種設計的態度？今日三人鼎談，我們邀來了老朋友——設計師同時也是一位編輯的 Mira——與聽眾分享關於「編輯設計」的理解。</p>
+          <div>
+            <p class="detail__time">Mon Dec 31 21:20:53 2018</p>
+            <span class="detail__tag">心理學</span>
+            <span class="detail__tag">童年</span>
+            <span class="detail__tag">工作</span>
           </div>
         </div>
         <ul class="content__current-play__share">
           <li class="share-link">
-            <a href></a>
+            <a href>
+              <i class="fab fa-twitter"></i>
+            </a>
           </li>
           <li class="share-link">
-            <a href></a>
+            <a href>
+              <i class="fab fa-facebook-f"></i>
+            </a>
           </li>
           <li class="share-link">
-            <a href></a>
+            <a href>
+              <i class="fab fa-weibo"></i>
+            </a>
           </li>
           <li class="share-link">
-            <a href></a>
+            <a href>
+              <i class="fas fa-link"></i>
+            </a>
           </li>
         </ul>
       </div>
@@ -237,27 +245,134 @@ export default {
         a {
           padding: 0 8px;
           border-right: 1px solid $black-1;
-          @include fontRegular(12px,$black-1,12px,1px);
+          @include fontRegular(12px, $black-1, 12px, 1px);
 
           &:hover {
-            text-decoration-line:underline;
+            text-decoration-line: underline;
           }
         }
 
         &:last-child {
           a {
-            padding-right:0;
-            border:none;
+            padding-right: 0;
+            border: none;
+          }
+        }
+      }
+    }
+    &__links__copyright {
+      text-align: right;
+      margin-top: 16px;
+      @include fontRegular(12px, $black-2, 12px, 1px);
+    }
+  }
+
+  .content {
+    max-width: 688px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    padding-top: 80px;
+
+    &__current-play {
+      position: relative;
+      width: 100%;
+      &__player {
+        width: 100%;
+        height: 288px;
+        display: flex;
+        justify-content: space-between;
+        background-color: $black-1;
+        &__cover {
+          width: 280px;
+          height: 280px;
+          border: 4px solid $black-1;
+          background: url("../assets/cover.jpg") no-repeat;
+          background-size: cover;
+        }
+        &__player-area {
+          width: calc(100% - 288px);
+        }
+      }
+      &__detail {
+        position: relative;
+        max-width: calc(688px - (32px * 2));
+        background-color: white;
+        padding: 36px 32px;
+        margin-top: 16px;
+
+        h3 {
+          @include fontBold(18px, $black-1, 18px, 1px);
+
+          &:after {
+            content: "\\";
+            display: block;
+            margin: 14px 0;
+          }
+        }
+
+        & > p {
+          @include fontRegular(14px, $black-1, 21px, 1px);
+        }
+
+        div {
+          position: absolute;
+          top: 36px;
+          right: 32px;
+          text-align: right;
+          .detail__time {
+            @include fontRegular(12px, $gray-2, 12px, 1px);
+            margin-bottom: 8px;
+          }
+
+          .detail__tag {
+            @include fontRegular(12px, $black-3, 12px, 1px);
+            margin-right: 8px;
+
+            &:last-child {
+              margin: 0;
+            }
+
+            &:before {
+              content: "#";
+            }
           }
         }
       }
 
-    }
-        &__links__copyright {
-          text-align: right;
-          margin-top: 16px;
-             @include fontRegular(12px,$black-2,12px,1px);
+      &__share {
+        position: absolute;
+        top: 0;
+        right: calc(-34px + -24px);
+        .share-link {
+          margin-bottom: 12px;
+          a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 34px;
+            height: 34px;
+            border-radius: 34px;
+            background-color: $gray-3;
+            transition: all 0.2s ease-in-out;
+
+            &:hover {
+              background-color: $black-1;
+
+              i {
+                color: $gray-1;
+              }
+            }
+          }
+          i {
+            font-size: 18px;
+            color: $black-1;
+            transition: all 0.2s ease-in-out;
+          }
         }
+      }
+    }
   }
 }
 </style>
