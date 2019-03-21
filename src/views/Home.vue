@@ -170,13 +170,17 @@
     <div class="content">
       <div class="content__current-play">
         <div class="content__current-play__player">
-          <div class="content__current-play__player__cover"></div>
+          <div
+            class="content__current-play__player__cover"
+            :style="{backgroundImage:'url(' + cover + ')'}"
+          ></div>
           <div class="content__current-play__player__player-area">
             <p>1</p>
-            <h1>從壹次心理咨詢裏講普通圓</h1>
+            <h1>{{title}}</h1>
             <div class="play-control">
+              <audio :src="audioSrc" id="audio" preload></audio>
               <div class="play-control__btn">
-                <div class="play-control__btn__play-icon">
+                <div class="play-control__btn__play-icon" id="play">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -187,7 +191,7 @@
                     <path d="M0 0h24v24H0z" fill="none"></path>
                   </svg>
                 </div>
-                <div class="play-control__btn__pause-icon">
+                <div class="play-control__btn__pause-icon" id="pause">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -201,8 +205,8 @@
               </div>
               <div class="play-control__timeline-area">
                 <div class="play-control__timeline-area__time"></div>
-                <span class="time-num-left">0:00</span>
-                <span class="time-num-right">30:00</span>
+                <span class="time-num-left" id="currentTime">0:00</span>
+                <span class="time-num-right" id="duration">0:00</span>
               </div>
             </div>
           </div>
@@ -246,13 +250,58 @@
 </template>
 
 <script>
+import dataJson from "../data.json";
+
 export default {
   name: "home",
   data() {
     return {
-      link:
-        "http://pojj9t7wl.bkt.clouddn.com/%E6%99%AE%E9%80%9A%E5%9C%86-%E7%AC%AC1%E6%9C%9F%20-%202019:3:17%20%E4%B8%8B%E5%8D%885.49.mp3"
+      cover: dataJson.feed.image,
+      audioSrc: dataJson.items[0].enclosure.link,
+      title: dataJson.items[0].title,
+      description: dataJson.items[0].description
     };
+  },
+  mounted() {
+    let play = document.getElementById("play");
+    let pause = document.getElementById("pause");
+    let audio = document.getElementById("audio");
+    let currentTime = document.getElementById("currentTime");
+    let duration = document.getElementById("duration");
+
+    function conversion(value) {
+      let minute = Math.floor(value / 60);
+      minute = minute.toString().length === 1 ? "0" + minute : minute;
+      let second = Math.round(value % 60);
+      second = second.toString().length === 1 ? "0" + second : second;
+      return `${minute}:${second}`;
+    }
+
+    audio.onloadedmetadata = function() {
+      duration.innerHTML = conversion(audio.duration);
+      currentTime.innerHTML = conversion(audio.currentTime);
+    };
+    setInterval(() => {
+      currentTime.innerHTML = conversion(audio.currentTime);
+      now.style.width =
+        (audio.currentTime / audio.duration.toFixed(3)) * 100 + "%";
+    }, 1000);
+
+    play.addEventListener("click", function() {
+      if (audio.paused) {
+        audio.play();
+        play.style.display = "none";
+        pause.style.display = "block";
+      }
+    });
+
+    pause.addEventListener("click", function() {
+      if (!audio.paused) {
+        audio.pause();
+        pause.style.display = "none";
+        play.style.display = "block";
+      }
+    });
   }
 };
 </script>
@@ -318,7 +367,7 @@ export default {
           height: 280px;
           border: 4px solid $black-1;
           border-right: 0;
-          background: url("../assets/cover.jpg") no-repeat;
+          background-repeat: no-repeat;
           background-size: cover;
         }
         &__player-area {
@@ -381,6 +430,7 @@ export default {
             &__btn {
               svg {
                 fill: $gray-1;
+                cursor: pointer;
               }
 
               &__play-icon {
