@@ -175,7 +175,7 @@
             :style="{backgroundImage:'url(' + cover + ')'}"
           ></div>
           <div class="content__current-play__player__player-area">
-            <p>1</p>
+            <p>{{itemNum}}</p>
             <h1>{{title}}</h1>
             <div class="play-control">
               <audio :src="audioSrc" id="audio" preload></audio>
@@ -204,7 +204,9 @@
                 </div>
               </div>
               <div class="play-control__timeline-area">
-                <div class="play-control__timeline-area__time"></div>
+                <div class="play-control__timeline-area__time">
+                  <div id="currentTimeLine"></div>
+                </div>
                 <span class="time-num-left" id="currentTime">0:00</span>
                 <span class="time-num-right" id="duration">0:00</span>
               </div>
@@ -213,9 +215,9 @@
         </div>
         <div class="content__current-play__detail">
           <h3>本期內容</h3>
-          <p>當我們談論編輯設計時，我們可以談論些什麼：一個術語的涵義，一門學科的範疇，一項工作的內容，一種設計的態度？今日三人鼎談，我們邀來了老朋友——設計師同時也是一位編輯的 Mira——與聽眾分享關於「編輯設計」的理解。</p>
+          <p>{{description}}</p>
           <div>
-            <p class="detail__time">Mon Dec 31 21:20:53 2018</p>
+            <p class="detail__time">{{pubDate}}</p>
             <span class="detail__tag">心理學</span>
             <span class="detail__tag">童年</span>
             <span class="detail__tag">工作</span>
@@ -257,9 +259,11 @@ export default {
   data() {
     return {
       cover: dataJson.feed.image,
-      audioSrc: dataJson.items[0].enclosure.link,
-      title: dataJson.items[0].title,
-      description: dataJson.items[0].description
+      itemNum: dataJson.items.length,
+      audioSrc: dataJson.items[dataJson.items.length - 1].enclosure.link,
+      title: dataJson.items[dataJson.items.length - 1].title,
+      description: dataJson.items[dataJson.items.length - 1].description,
+      pubDate: dataJson.items[dataJson.items.length - 1].pubDate
     };
   },
   mounted() {
@@ -268,6 +272,7 @@ export default {
     let audio = document.getElementById("audio");
     let currentTime = document.getElementById("currentTime");
     let duration = document.getElementById("duration");
+    let currentTimeLine = document.getElementById("currentTimeLine");
 
     function conversion(value) {
       let minute = Math.floor(value / 60);
@@ -283,7 +288,7 @@ export default {
     };
     setInterval(() => {
       currentTime.innerHTML = conversion(audio.currentTime);
-      now.style.width =
+      currentTimeLine.style.width =
         (audio.currentTime / audio.duration.toFixed(3)) * 100 + "%";
     }, 1000);
 
@@ -428,15 +433,52 @@ export default {
             justify-content: space-between;
             align-items: center;
             &__btn {
+              position: relative;
+              transition: all 0.25s ease-out;
+              cursor: pointer;
+
+              &:hover .play-control__btn__play-icon::after, .play-control__btn__pause-icon::after {
+                opacity: 0.1;
+                transform: scale(1);
+              }
               svg {
                 fill: $gray-1;
-                cursor: pointer;
               }
 
               &__play-icon {
+                &::after {
+                  z-index: 0;
+                  content: "";
+                  position: absolute;
+                  top: -4px;
+                  left: -4px;
+                  display: inline-block;
+                  width: 32px;
+                  height: 32px;
+                  border-radius: 32px;
+                  background-color: #fff;
+                  opacity: 0;
+                  transition: all 0.25s ease-out;
+                  transform: scale(0.9);
+                }
               }
 
               &__pause-icon {
+                &::after {
+                  z-index: 0;
+                  content: "";
+                  position: absolute;
+                  top: -4px;
+                  left: -4px;
+                  display: inline-block;
+                  width: 32px;
+                  height: 32px;
+                  border-radius: 32px;
+                  background-color: #fff;
+                  opacity: 0;
+                  transition: all 0.25s ease-out;
+                  transform: scale(0.9);
+                }
                 display: none;
               }
             }
@@ -448,6 +490,12 @@ export default {
                 width: 100%;
                 height: 4px;
                 background-color: $gray-1;
+
+                #currentTimeLine {
+                  height: 100%;
+                  width: 0px;
+                  background-color: #7c7c7a;
+                }
               }
 
               .time-num-left,
