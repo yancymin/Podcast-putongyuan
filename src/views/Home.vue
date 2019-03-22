@@ -246,18 +246,25 @@
           </li>
         </ul>
       </div>
-      <div class="content__audio-list"></div>
+      <div class="content__podcast-list">
+        <podcastItem :item="item" :index="i + 1" v-for="(item, i) in items"/>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import dataJson from "../data.json";
+import podcastItem from "../components/podcastItem.vue";
 
 export default {
   name: "home",
+  components: {
+    podcastItem
+  },
   data() {
     return {
+      items: dataJson.items,
       cover: dataJson.feed.image,
       itemNum: dataJson.items.length,
       audioSrc: dataJson.items[dataJson.items.length - 1].enclosure.link,
@@ -265,10 +272,13 @@ export default {
       description: dataJson.items[dataJson.items.length - 1].description,
       pubDate: dataJson.items[dataJson.items.length - 1].pubDate,
       share: {
-        twitter: 'https://twitter.com/share?text=Podcast-普通圆&url=https://pty.one',
-        facebook: 'https://www.facebook.com/sharer/sharer.php?u=https://pty.one/',
-        weibo:'https://service.weibo.com/share/share.php?appkey=&title=Podcast-普通圆&url=https://pty.one&searchPic=false&style=simple',
-        url: window.location.href,
+        twitter:
+          "https://twitter.com/share?text=Podcast-普通圆&url=https://pty.one",
+        facebook:
+          "https://www.facebook.com/sharer/sharer.php?u=https://pty.one/",
+        weibo:
+          "https://service.weibo.com/share/share.php?appkey=&title=Podcast-普通圆&url=https://pty.one&searchPic=false&style=simple",
+        url: window.location.href
       }
     };
   },
@@ -360,10 +370,11 @@ export default {
   .content {
     max-width: 688px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
-    padding-top: 80px;
+    padding-top: 100px;
 
     &__current-play {
       position: relative;
@@ -424,8 +435,8 @@ export default {
           }
 
           h1 {
-            position: absolute;
-            top: 120px;
+            position: relative;
+            top: -24px;
             text-align: center;
             @include fontBold(24px, $gray-1, 32px, 1px);
             &::selection {
@@ -524,7 +535,7 @@ export default {
         max-width: calc(688px - (32px * 2));
         background-color: white;
         padding: 36px 32px;
-        margin-top: 16px;
+        margin-top: 12px;
 
         h3 {
           @include fontBold(18px, $black-1, 18px, 1px);
@@ -596,6 +607,11 @@ export default {
           }
         }
       }
+    }
+
+    .content__podcast-list {
+      margin-top: 60px;
+      width: 100%;
     }
   }
 }
