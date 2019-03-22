@@ -225,22 +225,22 @@
         </div>
         <ul class="content__current-play__share">
           <li class="share-link">
-            <a href>
+            <a :href="share.twitter">
               <i class="fab fa-twitter"></i>
             </a>
           </li>
           <li class="share-link">
-            <a href>
+            <a :href="share.facebook">
               <i class="fab fa-facebook-f"></i>
             </a>
           </li>
           <li class="share-link">
-            <a href>
+            <a :href="share.weibo">
               <i class="fab fa-weibo"></i>
             </a>
           </li>
           <li class="share-link">
-            <a href>
+            <a :href="share.url">
               <i class="fas fa-link"></i>
             </a>
           </li>
@@ -263,7 +263,13 @@ export default {
       audioSrc: dataJson.items[dataJson.items.length - 1].enclosure.link,
       title: dataJson.items[dataJson.items.length - 1].title,
       description: dataJson.items[dataJson.items.length - 1].description,
-      pubDate: dataJson.items[dataJson.items.length - 1].pubDate
+      pubDate: dataJson.items[dataJson.items.length - 1].pubDate,
+      share: {
+        twitter: 'https://twitter.com/share?text=Podcast-普通圆&url=https://pty.one',
+        facebook: 'https://www.facebook.com/sharer/sharer.php?u=https://pty.one/',
+        weibo:'https://service.weibo.com/share/share.php?appkey=&title=Podcast-普通圆&url=https://pty.one&searchPic=false&style=simple',
+        url: window.location.href,
+      }
     };
   },
   mounted() {
@@ -437,7 +443,8 @@ export default {
               transition: all 0.25s ease-out;
               cursor: pointer;
 
-              &:hover .play-control__btn__play-icon::after, .play-control__btn__pause-icon::after {
+              &:hover .play-control__btn__play-icon::after,
+              .play-control__btn__pause-icon::after {
                 opacity: 0.1;
                 transform: scale(1);
               }
