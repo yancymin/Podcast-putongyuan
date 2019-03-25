@@ -18,8 +18,6 @@
 }
 
 :root {
-  /* height: 100%;
-  box-shadow: inset 0 -8px 0 $black-1; */
   background-color: $gray-1;
 }
 
