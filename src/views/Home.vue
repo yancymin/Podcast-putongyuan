@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="header">
-      <div class="header__logo">
+      <div class="header__logo logoMove preShow2">
         <svg
           width="363"
           height="148"
@@ -140,7 +140,7 @@
           ></path>
         </svg>
       </div>
-      <div class="header__links">
+      <div class="header__links preShow2">
         <ul>
           <li class="header__links__item">
             <a href>Apple</a>
@@ -164,12 +164,11 @@
             <a href>Castro</a>
           </li>
         </ul>
-        <div class="header__links__copyright">© 2019 pty.one</div>
       </div>
     </div>
     <div class="content">
       <div class="content__current-play">
-        <div class="content__current-play__player">
+        <div class="content__current-play__player preShow">
           <div
             class="content__current-play__player__cover"
             :style="{backgroundImage:'url(' + cover + ')'}"
@@ -213,7 +212,7 @@
             </div>
           </div>
         </div>
-        <div class="content__current-play__detail">
+        <div class="content__current-play__detail preShow delay-2">
           <h3>本期內容</h3>
           <p>{{description}}</p>
           <div>
@@ -223,7 +222,7 @@
             <span class="detail__tag">工作</span>
           </div>
         </div>
-        <ul class="content__current-play__share">
+        <ul class="content__current-play__share preShow2">
           <li class="share-link">
             <a :href="share.twitter">
               <i class="fab fa-twitter"></i>
@@ -246,10 +245,11 @@
           </li>
         </ul>
       </div>
-      <div class="content__podcast-list">
+      <div class="content__podcast-list preShow2">
         <podcastItem :item="item" :index="i + 1" v-for="(item, i) in items"/>
       </div>
     </div>
+    <footer>© 2019 pty.one | Made with ❤️ in Chengdu ・ Code by <a href="https://yancymin.design">Yancy Min</a></footer>
   </div>
 </template>
 
@@ -329,8 +329,10 @@ export default {
 
 <style lang="scss" scoped>
 @import "../style/global.scss";
+@import "../style/animation.scss";
 
 .home {
+  position: relative;
   width: 1200px;
   padding: 80px 0;
 
@@ -374,7 +376,7 @@ export default {
     justify-content: center;
     align-items: center;
     margin: 0 auto;
-    padding-top: 100px;
+    padding: 100px 0;
 
     &__current-play {
       position: relative;
@@ -557,8 +559,8 @@ export default {
           right: 32px;
           text-align: right;
           .detail__time {
-            @include fontRegular(12px, $gray-2, 12px, 1px);
             margin-bottom: 8px;
+            @include fontRegular(12px, $gray-2, 12px, 1px);
           }
 
           .detail__tag {
@@ -612,6 +614,21 @@ export default {
     .content__podcast-list {
       margin-top: 60px;
       width: 100%;
+    }
+  }
+
+  footer {
+    position: absolute;
+    left: calc( 50% - 200px);
+    bottom: 40px;
+    @include fontRegular(12px, $black-2, 12px, 1px);
+
+    a {
+      color: $black-2;
+
+      &:hover {
+        text-decoration-line: underline;
+      }
     }
   }
 }

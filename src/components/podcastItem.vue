@@ -6,6 +6,7 @@
     <div class="podcast-item__des">
       <p class="podcast-item__des__title">{{item.title}}</p>
       <p class="podcast-item__des__detail">{{item.description}}</p>
+      <p class="podcast-item__des__time">{{item.pubDate}}</p>
     </div>
     <span></span>
   </div>
@@ -14,7 +15,7 @@
 <script>
 export default {
   name: "podcastItem",
-  props: ['index', 'item'],
+  props: ["index", "item", "time"]
 };
 </script>
 
@@ -24,7 +25,7 @@ export default {
 .podcast-item {
   position: relative;
   width: auto;
-  padding: 40px 24px;
+  padding: 24px 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -63,6 +64,7 @@ export default {
   }
 
   &__des {
+    position: relative;
     max-width: 560px;
 
     &__title {
@@ -72,6 +74,13 @@ export default {
 
     &__detail {
       @include fontRegular(14px, $black-3, 21px, 1px);
+    }
+    &__time {
+      position: relative;
+      right: 0;
+      text-align: right;
+      margin-top: 12px;
+      @include fontRegular(12px, $gray-2, 12px, 1px);
     }
   }
 
@@ -100,7 +109,7 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: $gray-3;
+    background-color: white;
     transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     transform: scale(0.98);
   }

@@ -1,0 +1,69 @@
+@import "./global.scss";
+$firstDelay: 0s;
+.delay-2 {
+    animation-delay: (0.4s+$firstDelay) !important;
+    &::before {
+        animation-delay: (0.4s+$firstDelay) !important;
+    }
+}
+
+// .logoMove {
+//     z-index: 999;
+//     transform: translate(30vw, 30vh) scale(0.75);
+//     animation-delay: 1.5s !important;
+//     animation: logoMove 1s ease forwards;
+// }
+
+.preShow {
+    position: relative;
+    opacity: 0;
+    will-change: transform;
+    transform: translateX(-30px);
+    animation: preShow 2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+    &::before {
+        content: '';
+        z-index: 999;
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-color: $gray-1;
+        transform-origin: right;
+        will-change: transform;
+        animation-delay: 1s;
+        animation: preShowMove 2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+    }
+}
+
+.preShow2 {
+    opacity: 0;
+    animation-delay: (1.4s+$firstDelay) !important;
+    animation: preShow2 1s linear forwards;
+}
+
+@keyframes preShowMove {
+    to {
+        transform: scaleX(0)
+    }
+}
+
+@keyframes preShow {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes preShow2 {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes logoMove {
+    to {
+        transform: translate(0) scale(1);
+    }
+}
