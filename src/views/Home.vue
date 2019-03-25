@@ -334,12 +334,18 @@ export default {
 .home {
   position: relative;
   width: 1200px;
-  padding: 80px 0;
+  padding: 60px 0 40px 0;
 
   .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    &__logo {
+     svg {
+        width: 86%;
+     }
+    }
 
     &__links {
       li {
@@ -376,7 +382,7 @@ export default {
     justify-content: center;
     align-items: center;
     margin: 0 auto;
-    padding: 100px 0;
+    padding: 80px 0;
 
     &__current-play {
       position: relative;
@@ -550,6 +556,9 @@ export default {
         }
 
         & > p {
+          border-top: 1px dashed $gray-3;
+          margin-top: 20px;
+          padding-top: 20px;
           @include fontRegular(14px, $black-1, 21px, 1px);
         }
 
@@ -612,7 +621,7 @@ export default {
     }
 
     .content__podcast-list {
-      margin-top: 60px;
+      margin-top: 80px;
       width: 100%;
     }
   }
