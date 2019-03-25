@@ -10,6 +10,16 @@
       </div>
     </div>
     <div class="podcast-item__tag-time">
+      <div class="podcast-item__tag-time__duration">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+          <path
+            d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
+          ></path>
+          <path d="M0 0h24v24H0z" fill="none"></path>
+          <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"></path>
+        </svg>
+        <p>{{item.duration}}</p>
+      </div>
       <div class="podcast-item__tag-time__tag-wrap">
         <p class="tag-wrap__tag" v-for="tag in item.tag">{{tag}}</p>
       </div>
@@ -42,12 +52,32 @@ export default {
   }
 
   &__tag-time {
+    position: relative;
     display: flex;
     flex-direction: column;
     text-align: right;
     margin-top: 14px;
     @include fontRegular(12px, $gray-2, 12px, 1px);
 
+    &__duration {
+      position: absolute;
+      top: -6px;
+      height: 20px;
+      text-align: left;
+      padding-left: 80px;
+
+      svg {
+        width: 18px;
+        position: absolute;
+        top: 0;
+        fill: $gray-2;
+      }
+
+      p {
+        padding-left: 24px;
+        @include fontRegular(12px, $gray-2, 23px, 1px);
+      }
+    }
     &__tag-wrap {
       display: flex;
       justify-content: flex-end;
@@ -152,13 +182,14 @@ export default {
     display: inline-block;
     position: absolute;
     left: 0;
-    top: -6px;
+    top: -4px;
     width: 100%;
     height: 100%;
     background-color: white;
     transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     transform: scale(0.98);
-    border: 3px solid $black-3;
+    /* border: 3px solid $black-3; */
+    box-shadow: 0 32px 40px rgba(51, 51, 51, 0.08);
   }
 }
 </style>
