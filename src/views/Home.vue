@@ -224,22 +224,22 @@
         </div>
         <ul class="content__current-play__share preShow2">
           <li class="share-link">
-            <a :href="share.twitter">
+            <a :href="share.twitter" title="twitter">
               <i class="fab fa-twitter"></i>
             </a>
           </li>
           <li class="share-link">
-            <a :href="share.facebook">
+            <a :href="share.facebook" title="facebook">
               <i class="fab fa-facebook-f"></i>
             </a>
           </li>
           <li class="share-link">
-            <a :href="share.weibo">
+            <a :href="share.weibo" title="weibo">
               <i class="fab fa-weibo"></i>
             </a>
           </li>
           <li class="share-link">
-            <a :href="share.url">
+            <a :href="share.url" title="copylink">
               <i class="fas fa-link"></i>
             </a>
           </li>
