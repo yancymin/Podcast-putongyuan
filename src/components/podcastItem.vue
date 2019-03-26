@@ -2,7 +2,8 @@
   <div class="podcast-item">
     <div>
       <div
-        class="podcast-item__num playBtn"
+        :class="{'playBtn1':isBtn}"
+        class="podcast-item__num"
         v-for="audioLink in item.enclosure[0]"
         v-on:click="switchPlay(audioLink)"
       >
@@ -39,6 +40,20 @@ import dataJson from "../data.json";
 export default {
   name: "podcastItem",
   props: ["index", "item", "time", "tag", "audioLink"],
+  data() {
+    return {
+      isNum: true,
+      // isBtn: isBtn2(),
+      isBtn:  function() {
+        let audio = document.getElementById("audio");
+        if (audio.play) {
+          return false;
+        } else {
+          return false;
+        }
+      }
+    };
+  },
   mounted() {
     // let playBtn = document.getElementsByClassName("playBtn");
     // let audioLink = document.getElementsByClassName("audioLink");
@@ -47,6 +62,7 @@ export default {
     switchPlay: function(e) {
       audio.setAttribute("src", e);
       function audioPlay() {
+        // let playBtn = document.getElementsByClassName("playBtn");
         if (audio.paused) {
           audio.play();
           play.style.display = "none";
@@ -60,9 +76,6 @@ export default {
         play.style.display = "block";
       }
       audioPlay();
-      if (!audio.paused) {
-        audioPause();
-      }
     }
   }
 };
@@ -70,6 +83,15 @@ export default {
 
 <style lang="scss" scoped>
 @import "../style/global.scss";
+
+.playBtn1 {
+  p {
+    display: none;
+  }
+  &::before {
+    opacity: 1 !important;
+  }
+}
 
 .podcast-item {
   position: relative;
@@ -148,6 +170,21 @@ export default {
       width: 32px;
       height: 32px;
       background: url("../assets/listPlay.svg") no-repeat;
+      background-size: cover;
+      opacity: 0;
+      transition-delay: 0.2s;
+      transform: scale(0.85);
+      transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: 9px;
+      display: block;
+      width: 32px;
+      height: 32px;
+      background: url("../assets/pause.svg") no-repeat;
       background-size: cover;
       opacity: 0;
       transition-delay: 0.2s;
