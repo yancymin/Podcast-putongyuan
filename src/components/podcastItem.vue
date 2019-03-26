@@ -1,7 +1,11 @@
 <template>
   <div class="podcast-item">
     <div>
-      <div class="podcast-item__num">
+      <div
+        class="podcast-item__num playBtn"
+        v-for="audioLink in item.enclosure[0]"
+        v-on:click="switchPlay(audioLink)"
+      >
         <p>{{index}}</p>
       </div>
       <div class="podcast-item__des">
@@ -30,9 +34,37 @@
 </template>
 
 <script>
+import dataJson from "../data.json";
+
 export default {
   name: "podcastItem",
-  props: ["index", "item", "time", "tag"]
+  props: ["index", "item", "time", "tag", "audioLink"],
+  mounted() {
+    // let playBtn = document.getElementsByClassName("playBtn");
+    // let audioLink = document.getElementsByClassName("audioLink");
+  },
+  methods: {
+    switchPlay: function(e) {
+      audio.setAttribute("src", e);
+      function audioPlay() {
+        if (audio.paused) {
+          audio.play();
+          play.style.display = "none";
+          pause.style.display = "block";
+        }
+      }
+
+      function audioPause() {
+        audio.pause();
+        pause.style.display = "none";
+        play.style.display = "block";
+      }
+      audioPlay();
+      if (!audio.paused) {
+        audioPause();
+      }
+    }
+  }
 };
 </script>
 

@@ -249,7 +249,10 @@
         <podcastItem :item="item" :index="i + 1" v-for="(item, i) in items"/>
       </div>
     </div>
-    <footer>© 2019 pty.one | Made with ❤️ in Chengdu ・ Code by <a href="https://yancymin.design">Yancy Min</a></footer>
+    <footer>
+      © 2019 pty.one | Made with ❤️ in Chengdu ・ Code by
+      <a href="https://yancymin.design">Yancy Min</a>
+    </footer>
   </div>
 </template>
 
@@ -267,7 +270,7 @@ export default {
       items: dataJson.items,
       cover: dataJson.feed.image,
       itemNum: dataJson.items.length,
-      audioSrc: dataJson.items[dataJson.items.length - 1].enclosure.link,
+      audioSrc: dataJson.items[dataJson.items.length - 1].enclosure[0].link,
       title: dataJson.items[dataJson.items.length - 1].title,
       description: dataJson.items[dataJson.items.length - 1].description,
       pubDate: dataJson.items[dataJson.items.length - 1].pubDate,
@@ -308,21 +311,25 @@ export default {
         (audio.currentTime / audio.duration.toFixed(3)) * 100 + "%";
     }, 1000);
 
-    play.addEventListener("click", function() {
+    play.addEventListener("click", audioPlay);
+    pause.addEventListener("click", audioPause);
+
+    function audioPlay() {
       if (audio.paused) {
         audio.play();
         play.style.display = "none";
         pause.style.display = "block";
       }
-    });
+    }
 
-    pause.addEventListener("click", function() {
+    function audioPause() {
       if (!audio.paused) {
         audio.pause();
         pause.style.display = "none";
         play.style.display = "block";
       }
-    });
+    }
+
   }
 };
 </script>
@@ -342,9 +349,9 @@ export default {
     align-items: center;
 
     &__logo {
-     svg {
+      svg {
         width: 86%;
-     }
+      }
     }
 
     &__links {
@@ -628,7 +635,7 @@ export default {
 
   footer {
     position: absolute;
-    left: calc( 50% - 200px);
+    left: calc(50% - 200px);
     bottom: 40px;
     @include fontRegular(12px, $black-2, 12px, 1px);
 
